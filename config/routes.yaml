@@ -2,6 +2,19 @@
 #    path: /
 #    controller: App\Controller\DefaultController::index
 
+root:
+    path: /
+    controller: App\Controller\Root::main
+
+createWardrobe:
+    path: /create/wardrobe
+    controller: App\Controller\Root::createWardrobe
+
+removeWardrobe:
+    path: /remove/wardrobe/{id}
+    controller: App\Controller\Root::removeWardrobe
+    
+
 test:
     path: /test
     controller: App\Controller\Test::list

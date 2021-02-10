@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="{{ asset('css/style.css') }}" rel="stylesheet"/>
+
+        <title>Smart-Dressing</title>
+    </head>
+    <body>
+        {% include "header.twig" %} 
+        <div>
+            <h1>dashboard</h1>
+            <p>wardrobe {{ wardrobe.id }} </p>
+
+            <button class="removeWardrobe" onclick="removeWardrobe()">Remove Wardrobe</button>  
+        </div>
+        <script>
+            function removeWardrobe() {
+                window.location.href = "/remove/wardrobe/{{wardrobe.id}}"
+            }
+        </script>
+    </body>
+</html>
