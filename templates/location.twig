@@ -10,19 +10,20 @@
     </head>
     <body>
         {% include "header.twig" %} 
-        <div>
-            <h1>Here is the available city</h1>
+
+        <div class="location">
+            <h1>Please choose an available city</h1>
             <div class="cityList">
                 {% for item in locationList %}
                     <div class="city" id={{item.country ~ "-" ~ item.city}} onclick="updateLocation(this);">{{item.city}}</div>
                 {% endfor %}
             </div>
         </div>
+
         <script>
             function updateLocation(event){
                 console.log(event.id)
                 window.location.href = "/update/location/"+event.id
-                
             }
         </script>
     </body>
