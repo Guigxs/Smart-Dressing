@@ -34,6 +34,44 @@ body, h1{
 
 .dashboard{
     padding: .5rem 1rem .5rem 1rem;
+    display: flex;
+}
+
+.dashboard .left{   
+    flex: 8;
+    border-style: solid;
+    border-color: gray;
+    margin-right: 1rem;
+    padding: 10px;
+}
+
+.dashboard .left .clothersList{
+    /* width: 100px; */
+    display: inline-block;
+    margin: 1rem 0;
+}
+
+.dashboard .left .clothersList .cloth{
+    margin: .2rem;
+    padding: 1rem;
+    width: 116px;
+    float: left;
+    border-style: solid;
+    border-color: gray;
+    border-radius: 5px;
+}
+
+.dashboard .right{
+    flex: 1;
+}
+
+.dashboard .right .new{
+    margin: auto;
+}
+
+.dashboard .right .new .newButton{
+    font-size: 25px;
+    width: 100%;
 }
 
 .removeWardrobe{

@@ -3,6 +3,7 @@
 // src/Controller/Root
 namespace App\Controller;
 
+use App\Entity\Cloth;
 use App\Entity\Wardrobe;
 use App\Entity\Location;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -40,15 +41,19 @@ class Root extends AbstractController
             return $this->render("index.twig");
         }
         else{
-            $response = $this->client->request(
-                'GET',
-                "http://api.openweathermap.org/data/2.5/weather?q={$location[0]->getCity()},{$location[0]->getCountry()}&appid={$_SERVER['API_KEY']}&units=metric"
-            );
-            $content = $response->toArray();
+            // $response = $this->client->request(
+            //     'GET',
+            //     "http://api.openweathermap.org/data/2.5/weather?q={$location[0]->getCity()},{$location[0]->getCountry()}&appid={$_SERVER['API_KEY']}&units=metric"
+            // );
+            // $content = $response->toArray();
+            $content = ["name"=>"Waterlooooo", "main"=>["feels_like"=>200]];
+            $clothers = $this->getDoctrine()->getRepository(Cloth::class)->findAll();
+            
             return $this->render("dashboard.twig", [
                 "wardrobe" => $wardrobe[0],
                 "location" => $location[0],
-                "wheather" => $content
+                "wheather" => $content,
+                "clothers" => $clothers
             ]);
         }
     }
