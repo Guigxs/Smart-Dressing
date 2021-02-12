@@ -10,11 +10,17 @@
     </head>
     <body>
         {% include "header.twig" %} 
-        <div>
-            <h1>dashboard</h1>
-            <p>wardrobe {{ wardrobe.id }} </p>
+        <div class="dashboard">
+            <h1>Hello user !</h1>
 
-            <button class="removeWardrobe" onclick="removeWardrobe()">Remove Wardrobe</button>  
+            <div class="customHelloMessage">
+                Today's temperature in <b>{{wheather["name"]}}</b> is {{wheather["main"]["feels_like"]}}°C
+            </div>
+
+            <p>wardrobe {{ wardrobe.id }} </p>
+            <button class="newCloth">Add cloth</button>
+            <div class="removeWardrobe" onclick="removeWardrobe()">- Remove Wardrobe</div>  
+            <button class="getMyCloth">Get my cloth for today!</button>
         </div>
         <script>
             function removeWardrobe() {

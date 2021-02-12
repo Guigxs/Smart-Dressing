@@ -7,13 +7,35 @@ body, h1{
     padding: 0;
 }
 
-
 .header{
     color: white;
     background-color: rgb(109, 126, 148);
+    display: flex;
+    padding: .5rem 2rem .5rem 2rem;
 }
 
-.title{
-    padding: .5rem 0 .5rem 2rem;
+.header .title{
     font-size: 15px;
+    flex: 1;
+}
+
+.header .location{
+    padding-top: .5rem;
+}
+
+.cityList{
+    padding: 1rem;
+    background-color: blue;
+}
+
+.cityList .city{
+    font-size: 20px;
+}
+
+.dashboard{
+    padding: .5rem 1rem .5rem 1rem;
+}
+
+.removeWardrobe{
+    color: red;
 }

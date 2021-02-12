@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="{{ asset('css/style.css') }}" rel="stylesheet"/>
+
+        <title>Smart-Dressing</title>
+    </head>
+    <body>
+        {% include "header.twig" %} 
+        <div>
+            <h1>Here is the available city</h1>
+            <div class="cityList">
+                {% for item in locationList %}
+                    <div class="city" id={{item.country ~ "-" ~ item.city}} onclick="updateLocation(this);">{{item.city}}</div>
+                {% endfor %}
+            </div>
+        </div>
+        <script>
+            function updateLocation(event){
+                console.log(event.id)
+                window.location.href = "/update/location/"+event.id
+                
+            }
+        </script>
+    </body>
+</html>
