@@ -4,6 +4,7 @@
 namespace App\Controller;
 
 use App\Entity\Cloth;
+use App\Entity\Category;
 use App\Entity\Wardrobe;
 use App\Entity\Location;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -56,6 +57,14 @@ class Root extends AbstractController
                 "clothers" => $clothers
             ]);
         }
+    }
+
+    public function new(){
+        $categories = $this->getDoctrine()->getRepository(Category::class)->findAll();
+
+        return $this->render("new.twig", [
+            "categories"=>$categories
+        ]);
     }
 
     /**

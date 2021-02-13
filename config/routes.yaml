@@ -10,6 +10,10 @@ createWardrobe:
     path: /create/wardrobe
     controller: App\Controller\Root::createWardrobe
 
+new:
+    path: /new
+    controller: App\Controller\Root::new
+
 removeWardrobe:
     path: /remove/wardrobe/{id}
     controller: App\Controller\Root::removeWardrobe

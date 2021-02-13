@@ -33,7 +33,7 @@
 
                 <div class="right">
                     <div class="new">
-                        <button class="newButton">New</button>
+                        <button class="newButton" onclick="newPage()">New</button>
                     </div>
                 </div>
             </div>
@@ -46,6 +46,10 @@
         <script>
             function removeWardrobe() {
                 window.location.href = "/remove/wardrobe/{{wardrobe.id}}"
+            }
+
+            function newPage() {
+                window.location.href = "/new"
             }
         </script>
     </body>
