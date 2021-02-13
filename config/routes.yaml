@@ -6,6 +6,10 @@ root:
     path: /
     controller: App\Controller\Root::main
 
+getCloth:
+    path: /getCloth
+    controller: App\Controller\Root::getCloth
+
 createWardrobe:
     path: /create/wardrobe
     controller: App\Controller\Root::createWardrobe

@@ -22,7 +22,17 @@
                     <div class="clothersList">
                         {% for cloth in clothers %}
                             <div class="cloth" id="{{cloth.id}}">
-                                Vettement {{cloth.id}}
+                                <div class="imageLoc">
+                                    <img class="image" src="{{ asset('images/cloth.png') }}" alt="Default cloth" style="background-color:{{cloth.color}};">
+                                </div>
+
+                                <div class="name">Vettement {{cloth.id}}</div>
+
+                                <div class="specs">
+                                    <div class="color">Color: {{cloth.color}}</div>
+                                    <div class="quantity">Quantity: {{cloth.quantity}}</div>
+                                    <div class="fabric">Fabric: {{cloth.fabric}}</div>
+                                </div>
                             </div>
                         {% endfor %}
                     </div>
@@ -39,7 +49,7 @@
             </div>
 
             <div class="bottom">
-                <button class="getMyCloth">Get my cloth for today!</button>
+                <button class="getMyCloth" onclick="getMyCloth()">Get my cloth for today!</button>
             </div>
         </div>
 
@@ -50,6 +60,10 @@
 
             function newPage() {
                 window.location.href = "/new"
+            }
+
+            function getMyCloth() {
+                window.location.href = "/getCloth"
             }
         </script>
     </body>

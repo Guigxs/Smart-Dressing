@@ -25,7 +25,7 @@
                             <label for="category">Category : </label>
                             <select name="category" id="category">
                                 {% for category in categories %}
-                                    <option value="{{category.name}}">{{category.name}}</option>
+                                    <option value="{{category.id}}">{{category.name}}</option>
                                 {% endfor %}
                             </select>
                         </div>
@@ -79,22 +79,22 @@
                         <div class="item weather">
                             <label for="weather">Weather : </label>
                             <select name="weather" id="weather">
-                                <option value="800">Sunny</option>
-                                <option value="500">Rainy</option>
-                                <option value="741">Foggy</option>
-                                <option value="802">Cloudy</option>
-                                <option value="200">Thunderstorm</option>
-                                <option value="600">Snowy</option>
+                                <option value="sunny">Sunny</option>
+                                <option value="rainy">Rainy</option>
+                                <option value="foggy">Foggy</option>
+                                <option value="cloudy">Cloudy</option>
+                                <option value="thunderstorm">Thunderstorm</option>
+                                <option value="snowy">Snowy</option>
                             </select>
                         </div>
 
                         <div class="item rain">
                             <label for="rain">Rain/Snow level : </label>
                             <select name="rain" id="rain">
-                                <option value="0">None</option>
-                                <option value="300">Drizzel</option>
-                                <option value="501">Medium</option>
-                                <option value="502">Heavy</option>
+                                <option value="none">None</option>
+                                <option value="drizzle">Drizzel</option>
+                                <option value="medium">Medium</option>
+                                <option value="heavy">Heavy</option>
                             </select>
                         </div>
 

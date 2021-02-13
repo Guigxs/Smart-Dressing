@@ -19,6 +19,21 @@ class CategoryRepository extends ServiceEntityRepository
         parent::__construct($registry, Category::class);
     }
 
+    public function findBestCategory(int $temperature, string $weather, string $rainLevel){
+        $entityManager = $this->getEntityManager();
+
+        $query = $entityManager->createQuery(
+            'SELECT p
+            FROM App\Entity\Category p
+            WHERE p.temperature = :temperature AND p.weather = :weather AND p.rainLevel = :rain_level'
+        )->setParameter('temperature', $temperature)
+        ->setParameter("weather", $weather)
+        ->setParameter("rain_level",$rainLevel);
+
+        // returns an array of Product objects
+        return $query->getResult();
+
+    }
     // /**
     //  * @return Category[] Returns an array of Category objects
     //  */

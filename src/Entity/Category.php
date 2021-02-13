@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\CategoryRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -28,14 +30,25 @@ class Category
     private $temperature;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="string", length=255)
      */
     private $weather;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="string", length=255)
      */
     private $rainLevel;
+
+    /**
+     * @ORM\ManyToMany(targetEntity=Cloth::class, mappedBy="category")
+     */
+    private $cloths;
+
+    public function __construct()
+    {
+        $this->cloths = new ArrayCollection();
+    }
+
 
 
     public function getId(): ?int
@@ -67,27 +80,55 @@ class Category
         return $this;
     }
 
-    public function getWeather(): ?int
+    public function getWeather(): ?string
     {
         return $this->weather;
     }
 
-    public function setWeather(int $weather): self
+    public function setWeather(string $weather): self
     {
         $this->weather = $weather;
 
         return $this;
     }
 
-    public function getRainLevel(): ?int
+    public function getRainLevel(): ?string
     {
         return $this->rainLevel;
     }
 
-    public function setRainLevel(int $rainLevel): self
+    public function setRainLevel(string $rainLevel): self
     {
         $this->rainLevel = $rainLevel;
 
         return $this;
     }
+
+    /**
+     * @return Collection|Cloth[]
+     */
+    public function getCloths(): Collection
+    {
+        return $this->cloths;
+    }
+
+    public function addCloth(Cloth $cloth): self
+    {
+        if (!$this->cloths->contains($cloth)) {
+            $this->cloths[] = $cloth;
+            $cloth->addCategory($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCloth(Cloth $cloth): self
+    {
+        if ($this->cloths->removeElement($cloth)) {
+            $cloth->removeCategory($this);
+        }
+
+        return $this;
+    }
+
 }

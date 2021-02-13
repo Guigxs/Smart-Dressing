@@ -20,6 +20,24 @@ class ClothRepository extends ServiceEntityRepository
     }
 
     // /**
+    //   * @return Cloth[] Returns an array of Cloth objects
+    // */
+    // public function findBestClothers(int $temperature, int $weather, int $rainLevel){
+
+    //     $entityManager = $this->getEntityManager();
+
+    //     $query = $entityManager->createQuery(
+    //         'SELECT p
+    //         FROM App\Entity\Cloth p
+    //         WHERE p.temperature > :temperature AND '
+    //     )->setParameter('temperature', $temperature);
+
+    //     // returns an array of Product objects
+    //     return $query->getResult();
+        
+    // }
+
+    // /**
     //  * @return Cloth[] Returns an array of Cloth objects
     //  */
     /*

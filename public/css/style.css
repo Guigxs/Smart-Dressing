@@ -136,11 +136,15 @@ body, h1{
 .top .left .clothersList .cloth{
     margin: .2rem;
     padding: 1rem;
-    width: 116px;
+    width: 115px;
     float: left;
     border-style: solid;
     border-color: gray;
     border-radius: 5px;
+}
+
+.top .cloth .image{
+    width: 100%;
 }
 
 .top .right{
