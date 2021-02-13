@@ -26,6 +26,10 @@ removeLocation:
     path: /remove/location/
     controller: App\Controller\Root::removeLocation
 
-test:
-    path: /test
-    controller: App\Controller\Test::list
+createCategory:
+    path: /create/category
+    controller: App\Controller\Root::createCategory
+
+createCloth:
+    path: /create/cloth
+    controller: App\Controller\Root::createCloth

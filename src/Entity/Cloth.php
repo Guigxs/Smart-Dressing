@@ -22,6 +22,21 @@ class Cloth
      */
     private $color;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $name;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $fabric;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $quantity;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -35,6 +50,42 @@ class Cloth
     public function setColor(?string $color): self
     {
         $this->color = $color;
+
+        return $this;
+    }
+
+    public function getName(): ?string
+    {
+        return $this->name;
+    }
+
+    public function setName(string $name): self
+    {
+        $this->name = $name;
+
+        return $this;
+    }
+
+    public function getFabric(): ?string
+    {
+        return $this->fabric;
+    }
+
+    public function setFabric(string $fabric): self
+    {
+        $this->fabric = $fabric;
+
+        return $this;
+    }
+
+    public function getQuantity(): ?int
+    {
+        return $this->quantity;
+    }
+
+    public function setQuantity(int $quantity): self
+    {
+        $this->quantity = $quantity;
 
         return $this;
     }

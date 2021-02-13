@@ -10,6 +10,7 @@ use App\Entity\Location;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
 
 class Root extends AbstractController
@@ -126,7 +127,44 @@ class Root extends AbstractController
 
         return $this->redirect("/");
     }
+
+    /**
+     * @Route("/create/category", name="root_createCategory")
+     */
+    public function createCategory(Request $request){
+        $entityManager = $this->getDoctrine()->getManager();
+        $req = $request->request;
+
+        $category = new Category();
+        $category->setName($req->get("name"));
+        $category->setTemperature(intval($req->get("temperature")));
+        $category->setWeather(intval($req->get("weather")));
+        $category->setRainLevel(intval($req->get("rain")));
+
+        $entityManager->persist($category);
+        $entityManager->flush();
+
+        return $this->redirect("/");
+    }
     
+     /**
+     * @Route("/create/cloth", name="root_createCloth")
+     */
+    public function createCloth(Request $request){
+        $entityManager = $this->getDoctrine()->getManager();
+        $req = $request->request;
+
+        $cloth = new CLoth();
+        $cloth->setName($req->get("name"));
+        $cloth->setColor($req->get("color"));
+        $cloth->setFabric($req->get("fabric"));
+        $cloth->setQuantity(intval($req->get("quantity")));
+
+        $entityManager->persist($cloth);
+        $entityManager->flush();
+
+        return $this->redirect("/");
+    }
 }
 
 ?>
