@@ -12,6 +12,8 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
 class Root extends AbstractController
 {
@@ -63,8 +65,30 @@ class Root extends AbstractController
     public function new(){
         $categories = $this->getDoctrine()->getRepository(Category::class)->findAll();
 
+        $form = $this->createFormBuilder()
+                ->add("name")
+                ->add("category", ChoiceType::class, [
+                    "choices"=> []
+                ])
+                ->add("color")
+                ->add("fabric")
+                ->add("quantity", ChoiceType::class, [
+                    "choices"=> [
+                        "1" => 1,
+                        "2" => 2,
+                        "3" => 3,
+                        "4" => 4,
+                        "5" => 5,
+                    ]
+                ])
+                ->add("submit", SubmitType::class, [
+                    "label"=>"Envoyer"
+                ])
+                ->getForm();
+
         return $this->render("new.twig", [
-            "categories"=>$categories
+            "categories"=>$categories,
+            "newClothForm"=>$form->createView()
         ]);
     }
 
