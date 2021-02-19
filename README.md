@@ -2,6 +2,8 @@
 Web Architecture project
 ## Start server
 ````
+composer update
+composer install
 symfony server:start
 ````
 
