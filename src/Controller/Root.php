@@ -7,6 +7,7 @@ use App\Entity\Cloth;
 use App\Entity\Category;
 use App\Entity\Wardrobe;
 use App\Entity\Location;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Response;
@@ -62,16 +63,73 @@ class Root extends AbstractController
         }
     }
 
-    public function new(){
+    public function new(Request $request): Response{
         $categories = $this->getDoctrine()->getRepository(Category::class)->findAll();
+        
+        $category = new Category();
+        $cloth = new Cloth();
 
-        $form = $this->createFormBuilder()
+
+        $categoryForm = $this->createFormBuilder($category)
                 ->add("name")
-                ->add("category", ChoiceType::class, [
-                    "choices"=> []
+                ->add("temperature", ChoiceType::class, [
+                    "choices" => [
+                        "- 10" => -10,
+                        "- 5" => -5,
+                        "0" => 0,
+                        "5" => 5,
+                        "10" => 10,
+                        "20" => 20,
+                        "30" => 30
+                    ]
                 ])
-                ->add("color")
-                ->add("fabric")
+                ->add("weather", ChoiceType::class, [
+                    "choices" => [
+                        "Sunny" => "sunny",
+                        "Rainy" => "rainy",
+                        "Foggy" => "foggy",
+                        "Cloudy" => "cloudy",
+                        "Thunderstorm" => "thunderstorm",
+                        "Snowy" => "snowy"
+                    ]
+                ])
+                ->add("rainLevel", ChoiceType::class, [
+                    "choices" => [
+                        "None" => "none",
+                        "Drizzle" => "drizzle",
+                        "Medium" => "medium",
+                        "Heavy" => "heavy"
+                    ]
+                ])
+                ->add("submit", SubmitType::class, [
+                    "label"=>"Envoyer"
+                ])
+                ->getForm();
+
+                $categoryForm->handleRequest($request);
+
+        if ($categoryForm->isSubmitted() && $categoryForm->isValid()) {
+
+            $response = $this->forward('App\Controller\Root::createCategory', [
+                'category'  => $categoryForm->getData(),
+            ]);
+
+            return $response;
+        }
+
+        $clothForm = $this->createFormBuilder($cloth)
+                ->add("name")
+                ->add("category", EntityType::class, [
+                    "multiple" => true,
+                    "class" => Category::class,
+                    'choice_label' => "name",
+                ])
+                ->add("color", null, [
+                    "required" => true,
+                ])
+                ->add("fabric", null, [
+                    "required" => true,
+                ])
                 ->add("quantity", ChoiceType::class, [
                     "choices"=> [
                         "1" => 1,
@@ -86,9 +144,22 @@ class Root extends AbstractController
                 ])
                 ->getForm();
 
+        $clothForm->handleRequest($request);
+
+        if ($clothForm->isSubmitted() && $clothForm->isValid()) {
+
+            $response = $this->forward('App\Controller\Root::createCloth', [
+                'cloth'  => $clothForm->getData(),
+            ]);
+
+            return $response;
+        }
+
+
         return $this->render("new.twig", [
             "categories"=>$categories,
-            "newClothForm"=>$form->createView()
+            "newCategoryForm" => $categoryForm->createView(),
+            "newClothForm"=>$clothForm->createView()
         ]);
     }
 
@@ -211,7 +282,8 @@ class Root extends AbstractController
             
             if (empty($categories)){
                 return $this->render("empty.twig");
-            }$
+            }
+            
             $clothers = $categories[0]->getCloths();
             
             return $this->render("dashboard.twig", [
@@ -272,15 +344,8 @@ class Root extends AbstractController
     /**
      * @Route("/create/category", name="root_createCategory")
      */
-    public function createCategory(Request $request){
+    public function createCategory(Category $category){
         $entityManager = $this->getDoctrine()->getManager();
-        $req = $request->request;
-
-        $category = new Category();
-        $category->setName($req->get("name"));
-        $category->setTemperature(intval($req->get("temperature")));
-        $category->setWeather($req->get("weather"));
-        $category->setRainLevel($req->get("rain"));
 
         $entityManager->persist($category);
         $entityManager->flush();
@@ -291,19 +356,8 @@ class Root extends AbstractController
      /**
      * @Route("/create/cloth", name="root_createCloth")
      */
-    public function createCloth(Request $request){
+    public function createCloth(Cloth $cloth){
         $entityManager = $this->getDoctrine()->getManager();
-        $req = $request->request;
-
-        $cloth = new CLoth();
-        $cloth->setName($req->get("name"));
-
-        $category = $this->getDoctrine()->getRepository(Category::class)->find(intval($req->get("category")));
-        $cloth->addCategory($category);
-
-        $cloth->setColor($req->get("color"));
-        $cloth->setFabric($req->get("fabric"));
-        $cloth->setQuantity(intval($req->get("quantity")));
 
         $entityManager->persist($cloth);
         $entityManager->flush();

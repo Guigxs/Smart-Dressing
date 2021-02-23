@@ -52,51 +52,34 @@
 
                 <div class="col">
                     <h1>Create new category</h1>
-                    <form action="/create/category" class="form" method="post">
+                    
+                    {{form_start(newCategoryForm, { 'attr' : { 'class': 'form' } })}}
+
                         <div class="item name">
                             <label for="name">Name : </label>
-                            <input type="text" name="name" id="name">
+                            {{ form_widget(newCategoryForm.name) }}
                         </div>
 
                         <div class="item temperature">
                             <label for="temperature">Temperature : </label>
-                            <select name="temperature" id="temperature">
-                                <option value="-10">- 10</option>
-                                <option value="-5">- 5</option>
-                                <option value="0">0</option>
-                                <option value="5">5</option>
-                                <option value="10">10</option>
-                                <option value="20">20</option>
-                                <option value="30">30</option>
-                            </select>
+                            {{ form_widget(newCategoryForm.temperature) }}
                         </div>
 
                         <div class="item weather">
                             <label for="weather">Weather : </label>
-                            <select name="weather" id="weather">
-                                <option value="sunny">Sunny</option>
-                                <option value="rainy">Rainy</option>
-                                <option value="foggy">Foggy</option>
-                                <option value="cloudy">Cloudy</option>
-                                <option value="thunderstorm">Thunderstorm</option>
-                                <option value="snowy">Snowy</option>
-                            </select>
+                            {{ form_widget(newCategoryForm.weather) }}
                         </div>
 
                         <div class="item rain">
                             <label for="rain">Rain/Snow level : </label>
-                            <select name="rain" id="rain">
-                                <option value="none">None</option>
-                                <option value="drizzle">Drizzel</option>
-                                <option value="medium">Medium</option>
-                                <option value="heavy">Heavy</option>
-                            </select>
+                            {{ form_widget(newCategoryForm.rainLevel) }}
                         </div>
 
                         <div class="send">
-                            <input type="submit" class="button createCloth"></input>
+                            {{ form_widget(newCategoryForm.submit) }}
                         </div>
-                    </form>
+                        
+                    {{form_end(newCategoryForm)}}
                 
                 </div>
 
