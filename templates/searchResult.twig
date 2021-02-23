@@ -13,14 +13,8 @@
         <div class="dashboard">
             <div class="top">
                 <div class="left">
-                    <h1>Hello user !</h1>
-
-                    <div class="customHelloMessage">
-                        Today's temperature in <b>{{wheather["name"]}}</b> is {{wheather["main"]["feels_like"]}}°C
-                    </div>
-
                     <div class="clothersList">
-                        {% for cloth in clothers %}
+                        {% for cloth in items %}
                             <div class="cloth" id="{{cloth.id}}">
                                 <div class="del" onClick="remove({{cloth.id}})">
                                     -
@@ -32,7 +26,6 @@
                                 <div class="name">Vettement {{cloth.id}}</div>
 
                                 <div class="specs">
-                                    <div class="name">Name: {{cloth.name}}</div>
                                     <div class="color">Color: {{cloth.color}}</div>
                                     <div class="quantity">Quantity: {{cloth.quantity}}</div>
                                     <div class="fabric">Fabric: {{cloth.fabric}}</div>
@@ -40,39 +33,16 @@
                             </div>
                         {% endfor %}
                     </div>
-
-                    <div class="removeWardrobe" onclick="removeWardrobe()">- Remove Wardrobe n°{{wardrobe.id}}</div>  
-
                 </div>
-
-                <div class="right">
-                    <div class="new">
-                        <button class="newButton" onclick="newPage()">New</button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="bottom">
-                <button class="getMyCloth" onclick="getMyCloth()">Get my cloth for today!</button>
             </div>
         </div>
-
-        <script>
-            function removeWardrobe() {
-                window.location.href = "/remove/wardrobe/{{wardrobe.id}}"
-            }
-
-            function newPage() {
-                window.location.href = "/new"
-            }
-
-            function getMyCloth() {
-                window.location.href = "/getCloth"
-            }
-
-            function remove(cloth) {
-                window.location.href = `/remove/cloth/${cloth}/`
-            }
-        </script>
     </body>
+    
+    <script>
+    
+    function remove(cloth) {
+        window.location.href = `/remove/cloth/${cloth}/`
+    }
+
+    </script>
 </html>

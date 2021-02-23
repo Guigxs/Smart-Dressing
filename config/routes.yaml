@@ -37,3 +37,11 @@ createCategory:
 createCloth:
     path: /create/cloth
     controller: App\Controller\Root::createCloth
+
+removeCloth:
+    path: /remove/cloth/{id}
+    controller: App\Controller\Root::removeCloth
+
+search:
+    path: /search/{searchField}
+    controller: App\Controller\Root::search

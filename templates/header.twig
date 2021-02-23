@@ -2,6 +2,10 @@
     <div class="title">
 	    <h1 onclick="home()">Smart-Dressing</h1>
     </div>
+    <div class="searchBar">
+        <input id="bar" class="bar" type="text" placeholder="Search a cloth...">
+        <button onclick="search()">GO!</button>
+    </div>
     <div class="location" onclick="changeLocation()">Change location</div>
 </div>
 <script>
@@ -11,5 +15,9 @@
 
     function home(){
         window.location.href = "/"
+    }
+
+    function search(){
+        window.location.href = "/search/" + document.getElementById("bar").value + "/"
     }
 </script>

@@ -283,7 +283,7 @@ class Root extends AbstractController
             if (empty($categories)){
                 return $this->render("empty.twig");
             }
-            
+
             $clothers = $categories[0]->getCloths();
             
             return $this->render("dashboard.twig", [
@@ -353,7 +353,7 @@ class Root extends AbstractController
         return $this->redirect("/");
     }
     
-     /**
+    /**
      * @Route("/create/cloth", name="root_createCloth")
      */
     public function createCloth(Cloth $cloth){
@@ -363,6 +363,33 @@ class Root extends AbstractController
         $entityManager->flush();
 
         return $this->redirect("/");
+    }
+
+    /**
+     * @Route("/remove/cloth", name="root_removeCloth")
+     */
+    public function removeCloth(string $id){
+        $entityManager = $this->getDoctrine()->getManager();
+        $cloth = $this->getDoctrine()->getRepository(Cloth::class)->find($id);
+
+        $entityManager->remove($cloth);
+        $entityManager->flush();
+
+        return $this->redirect("/");
+    }
+
+    /**
+     * @Route("/search", name="root_search")
+     */
+    public function search(string $searchField){
+        
+        if (empty($category)){
+            $clothers = $this->getDoctrine()->getRepository(Cloth::class)->findBy(["name" => $searchField]);
+            dump($clothers);
+            return $this->render("searchResult.twig", [
+                "items" => $clothers
+            ]);
+        }
     }
 }
 

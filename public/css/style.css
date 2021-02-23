@@ -13,16 +13,34 @@ body, h1{
     color: white;
     background-color: rgb(109, 126, 148);
     display: flex;
+    justify-content: space-between;
     padding: .5rem 2rem .5rem 2rem;
 }
 
 .header .title{
     font-size: 15px;
-    flex: 1;
+}
+
+.header .searchBar{
+    margin: auto;
+    border: none;
+    display: flex;
+}
+
+.header .searchBar .bar{
+    font-size: 22px;
+}
+
+.header .searchBar button{
+    font-size: 22px;
+    background: #d7d7d7;
+    border: none;
+    cursor: pointer;
 }
 
 .header .location{
     padding-top: .5rem;
+    float: right;
 }
 
 /* ----- Index (create wardrobe) ----- */
@@ -141,6 +159,35 @@ body, h1{
     border-style: solid;
     border-color: gray;
     border-radius: 5px;
+}
+
+.top .cloth:hover .del{
+    display: block;
+    background-color: rgba(209, 0, 0, 0.74);
+    position: relative;
+    top : -1.5rem;
+    left: 110px;
+    border-radius: 10px;
+    width: 30px;
+    color: white;
+    text-align: center;
+    font-size: 22px;
+    cursor: pointer;
+}
+
+.top .cloth .del{
+    display: none;
+    /* display: block;
+    background-color: rgba(209, 0, 0, 0.74);
+    position: relative;
+    top : -1.5rem;
+    left: 110px;
+    border-radius: 10px;
+    width: 30px;
+    color: white;
+    text-align: center;
+    font-size: 22px;
+    cursor: pointer; */
 }
 
 .top .cloth .image{
