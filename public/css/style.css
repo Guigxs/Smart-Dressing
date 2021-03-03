@@ -19,6 +19,7 @@ body, h1{
 
 .header .title{
     font-size: 15px;
+    cursor: pointer;
 }
 
 .header .searchBar{
@@ -41,6 +42,7 @@ body, h1{
 .header .location{
     padding-top: .5rem;
     float: right;
+    cursor: pointer;
 }
 
 /* ----- Index (create wardrobe) ----- */
@@ -74,11 +76,11 @@ body, h1{
     color: rgb(0, 102, 255);
     font-size: 20px;
     padding: 1rem;
+    cursor: pointer;
 }
 
 /* ----- Dashboard ----- */
 .new{
-
 }
 
 .new .columns{
@@ -153,8 +155,7 @@ body, h1{
 
 .top .left .clothersList .cloth{
     margin: .2rem;
-    padding: 1rem;
-    width: 115px;
+    width: 130px;
     float: left;
     border-style: solid;
     border-color: gray;
@@ -165,7 +166,7 @@ body, h1{
     display: block;
     background-color: rgba(209, 0, 0, 0.74);
     position: relative;
-    top : -1.5rem;
+    top : -10px;
     left: 110px;
     border-radius: 10px;
     width: 30px;
@@ -177,21 +178,20 @@ body, h1{
 
 .top .cloth .del{
     display: none;
-    /* display: block;
-    background-color: rgba(209, 0, 0, 0.74);
-    position: relative;
-    top : -1.5rem;
-    left: 110px;
-    border-radius: 10px;
-    width: 30px;
-    color: white;
-    text-align: center;
-    font-size: 22px;
-    cursor: pointer; */
+}
+
+.top .cloth .imageLoc{
+    padding: .5rem;
 }
 
 .top .cloth .image{
     width: 100%;
+}
+
+.top .cloth .specs{
+    font-size:12px;
+    padding: 1rem .5rem;
+    background-color: rgb(223, 223, 223);
 }
 
 .top .right{
@@ -207,6 +207,7 @@ body, h1{
     width: 100%;
     border-radius: 10px;
     border-width: 1px;
+    cursor: pointer;
 }
 
 .bottom{
@@ -217,6 +218,7 @@ body, h1{
     font-size: 25px;
     border-radius: 10px;
     border-width: 1px;
+    cursor: pointer;
 }
 
 .removeWardrobe{
@@ -226,4 +228,5 @@ body, h1{
     width: 12rem;
     float: right;
     border-radius: 10px;
+    cursor: pointer;
 }

@@ -31,11 +31,11 @@ class Root extends AbstractController
      */
     public function main()
     {
-        // echo $_SERVER['API_KEY'];
         $wardrobe = $this->getDoctrine()->getRepository(Wardrobe::class)->findAll();
         $location = $this->getDoctrine()->getRepository(Location::class)->findAll();
 
-        $locationList = [["city"=>"Waterloo", "country"=>"BE"], ["city"=>"Brussels", "country"=>"BE"], ["city"=>"Liege", "country"=>"BE"]];
+        $content = $this->client->request("GET", "https://restcountries.eu/rest/v2/all");
+        $locationList = $content->toArray();
 
         if (empty($location)){
             return $this->render("location.twig", [
@@ -51,7 +51,6 @@ class Root extends AbstractController
                 "http://api.openweathermap.org/data/2.5/weather?q={$location[0]->getCity()},{$location[0]->getCountry()}&appid={$_SERVER['API_KEY']}&units=metric"
             );
             $content = $response->toArray();
-            // $content = ["name"=>"Waterlooooo", "main"=>["feels_like"=>200]];
             $clothers = $this->getDoctrine()->getRepository(Cloth::class)->findAll();
             
             return $this->render("dashboard.twig", [
