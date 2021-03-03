@@ -124,6 +124,24 @@ body, h1{
     display: flex;
 }
 
+.new .list .category:hover .del{
+    display: block;
+    background-color: rgba(209, 0, 0, 0.74);
+    position: relative;
+    top : -25px;
+    left: 305px;
+    border-radius: 10px;
+    width: 30px;
+    color: white;
+    text-align: center;
+    font-size: 22px;
+    cursor: pointer;
+}
+
+.new .list .category .del{
+    display: none;
+}
+
 .new .list .category .name{
 
 }

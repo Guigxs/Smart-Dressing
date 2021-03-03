@@ -34,6 +34,10 @@ createCategory:
     path: /create/category
     controller: App\Controller\Root::createCategory
 
+removeCategory:
+    path: /remove/category/{id}
+    controller: App\Controller\Root::removeCategory
+
 createCloth:
     path: /create/cloth
     controller: App\Controller\Root::createCloth

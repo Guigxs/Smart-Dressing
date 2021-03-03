@@ -351,6 +351,19 @@ class Root extends AbstractController
 
         return $this->redirect("/");
     }
+
+    /**
+     * @Route("/remove/category", name="root_removeCategory")
+     */
+    public function removeCategory(string $id){
+        $entityManager = $this->getDoctrine()->getManager();
+        $category = $this->getDoctrine()->getRepository(Category::class)->find($id);
+
+        $entityManager->remove($category);
+        $entityManager->flush();
+
+        return $this->redirect("/");
+    }
     
     /**
      * @Route("/create/cloth", name="root_createCloth")
