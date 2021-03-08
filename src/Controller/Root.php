@@ -396,8 +396,12 @@ class Root extends AbstractController
     public function search(string $searchField){
         
         if (empty($category)){
-            $clothers = $this->getDoctrine()->getRepository(Cloth::class)->findBy(["name" => $searchField]);
-            dump($clothers);
+            $clothers = $this->getDoctrine()->getRepository(Cloth::class)->createQueryBuilder("c")
+                ->where("c.name LIKE :name")
+                ->setParameter('name', $searchField.'%')
+                ->getQuery()
+                ->getResult();
+
             return $this->render("searchResult.twig", [
                 "items" => $clothers
             ]);
