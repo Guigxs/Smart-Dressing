@@ -1,51 +1,51 @@
-#index:
-#    path: /
-#    controller: App\Controller\DefaultController::index
-
 root:
     path: /
     controller: App\Controller\Root::main
-
-getCloth:
-    path: /getCloth
-    controller: App\Controller\Root::getCloth
-
-createWardrobe:
-    path: /create/wardrobe
-    controller: App\Controller\Root::createWardrobe
 
 new:
     path: /new
     controller: App\Controller\Root::new
 
+createWardrobe:
+    path: /create/wardrobe
+    controller: App\Controller\WardrobeController::createWardrobe
+
 removeWardrobe:
     path: /remove/wardrobe/{id}
-    controller: App\Controller\Root::removeWardrobe
+    controller: App\Controller\WardrobeController::removeWardrobe
     
 updateLocation:
     path: /update/location/{country}-{city}
-    controller: App\Controller\Root::updateLocation
+    controller: App\Controller\LocationController::updateLocation
 
 removeLocation:
     path: /remove/location/
-    controller: App\Controller\Root::removeLocation
+    controller: App\Controller\LocationController::removeLocation
 
 createCategory:
     path: /create/category
-    controller: App\Controller\Root::createCategory
+    controller: App\Controller\CategoryController::createCategory
 
 removeCategory:
     path: /remove/category/{id}
-    controller: App\Controller\Root::removeCategory
+    controller: App\Controller\CategoryController::removeCategory
 
 createCloth:
     path: /create/cloth
-    controller: App\Controller\Root::createCloth
+    controller: App\Controller\ClothController::createCloth
 
 removeCloth:
     path: /remove/cloth/{id}
-    controller: App\Controller\Root::removeCloth
+    controller: App\Controller\ClothController::removeCloth
+
+getCloth:
+    path: /getCloth
+    controller: App\Controller\ClothController::getCloth
 
 search:
     path: /search/{searchField}
-    controller: App\Controller\Root::search
+    controller: App\Controller\ClothController::search
+
+getClothByCategory:
+    path: /filter/category/{id}
+    controller: App\Controller\ClothController::getClothByCategory

@@ -90,7 +90,7 @@
                         {% for category in categories %}
                             <div class="category">
                                 <div class="del" onclick="removeCategory({{category.id}})">-</div>
-                                <div class="name">{{category.id}}- {{category.name}} : </div>
+                                <div class="name" onclick="getCategory({{category.id}})">{{category.id}}- {{category.name}} : </div>
                                 <div class="specs"> {{category.temperature}}°C - {{category.weather}} - {{category.rainLevel}} </div> 
                             </div>
                         {% endfor %}
@@ -102,6 +102,9 @@
         <script>
             function removeCategory(id){
                 window.location.href = "/remove/category/"+id
+            }
+            function getCategory(id){
+                window.location.href = "/filter/category/"+id
             }
         
         </script>
