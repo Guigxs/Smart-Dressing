@@ -6,12 +6,22 @@ namespace App\Controller;
 use App\Entity\Category;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Contracts\HttpClient\HttpClientInterface;
+// use App\Repository\CategoryRepository;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Serializer\SerializerInterface;
 use Symfony\Component\Routing\Annotation\Route;
 
 
 class CategoryController extends AbstractController
 {
+    /**
+     * @Route("/api/category/all", name="categoryController_getCategories")
+     */
+    public function getCategories(SerializerInterface $serializer){
+        $categories = $this->getDoctrine()->getRepository(Category::class)->findAll();
+
+        return $this->json($categories, 200, [], ["groups"=>["show_category"]]);
+    }
     /**
      * @Route("/create/category", name="categoryController_createCategory")
      */

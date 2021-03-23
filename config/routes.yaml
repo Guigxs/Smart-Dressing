@@ -6,6 +6,10 @@ new:
     path: /new
     controller: App\Controller\Root::new
 
+getCategories:
+    path: /api/category/all
+    controller: App\Controller\CategoryController::getCategories
+
 createWardrobe:
     path: /create/wardrobe
     controller: App\Controller\WardrobeController::createWardrobe

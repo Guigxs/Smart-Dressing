@@ -7,6 +7,13 @@ composer install
 symfony server:start
 ````
 
+## Clear cache
+For updating the entities groups you need to clear caches.
+
+```
+php bin/console cache:clear
+```
+
 ## Create entity
 ````
 php bin/console make:entity
