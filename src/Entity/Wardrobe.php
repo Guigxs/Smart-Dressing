@@ -5,6 +5,8 @@ namespace App\Entity;
 use App\Repository\WardrobeRepository;
 use Doctrine\ORM\Mapping as ORM;
 
+use Symfony\Component\Serializer\Annotation\Groups;
+
 /**
  * @ORM\Entity(repositoryClass=WardrobeRepository::class)
  */
@@ -14,11 +16,13 @@ class Wardrobe
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * @Groups({"show_wardrobe"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Groups({"show_wardrobe"})
      */
     private $user;
 

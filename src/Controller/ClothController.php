@@ -7,23 +7,35 @@ use App\Entity\Cloth;
 use App\Entity\Category;
 use App\Entity\Wardrobe;
 use App\Entity\Location;
-
+use ErrorException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
 use Symfony\Component\Routing\Annotation\Route;
-
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Serializer\SerializerInterface;
+use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
+use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 class ClothController extends AbstractController
 {
-
     private $client;
 
     public function __construct(HttpClientInterface $client)
     {
         $this->client = $client;
     }
-    
-    
+
+    public function getAllCloth($catId){
+        if($catId == null){
+            $clothers = $this->getDoctrine()->getRepository(Cloth::class)->findAll();
+        }
+        else{
+            $category = $this->getDoctrine()->getRepository(Category::class)->find($catId);
+            $clothers = $category->getCloths();
+        }
+        return $this->json($clothers, 200, [], ["groups"=>["show_cloth"]]);
+    }
+
     public function getCloth(){
         $wardrobe = $this->getDoctrine()->getRepository(Wardrobe::class)->findAll();
         $location = $this->getDoctrine()->getRepository(Location::class)->findAll();
@@ -128,35 +140,53 @@ class ClothController extends AbstractController
             $categories = $this->getDoctrine()->getRepository(Category::class)->findBestCategory($temperatureQuery, $weatherQuery, $rainQuery);
             
             if (empty($categories)){
-                return $this->render("empty.twig");
+                return $this->json(["error"=>"There is no category for this weather"], 300, [], []);
             }
 
             $clothers = $categories[0]->getCloths();
-            
-            return $this->render("dashboard.twig", [
-                "wardrobe" => $wardrobe[0],
-                "location" => $location[0],
-                "wheather" => $content,
-                "clothers" => $clothers
-            ]);
+
+            return $this->json($clothers, 200, [], ["groups"=>["show_cloth"]]);
         }
     }
 
-    /**
-     * @Route("/create/cloth", name="clothController_createCloth")
-     */
-    public function createCloth(Cloth $cloth){
+    public function createCloth(Request $request, DenormalizerInterface $denormalizer, ValidatorInterface $validator){
+        try{
+            $data = json_decode($request->getContent(), true);
+            $categories = $data["categories"];
+            $cloth = $denormalizer->denormalize($data, Cloth::class);
+
+            $errors = $validator->validate($cloth);
+            if (count($errors) > 0){
+                return $this->json([$errors], 400);
+            }
+
+        }catch(ErrorException $e) {
+            return $this->json([
+                "error"=>"Syntax error"
+            ], 400);
+        }
+        
+        
+        foreach ($categories as $cat){
+            $category = $this->getDoctrine()->getRepository(Category::class)->find($cat);
+            if ($category){
+                $cloth->addCategory($category);
+            }
+            else{
+                return $this->json([
+                    "error"=>"One on more category does not exist"
+                ], 400);
+            }
+        }
+
         $entityManager = $this->getDoctrine()->getManager();
 
         $entityManager->persist($cloth);
         $entityManager->flush();
 
-        return $this->redirect("/");
+        return $this->json($cloth, 201, [], ["groups"=>["show_cloth"]]);
     }
 
-    /**
-     * @Route("/remove/cloth", name="clothController_removeCloth")
-     */
     public function removeCloth(string $id){
         $entityManager = $this->getDoctrine()->getManager();
         $cloth = $this->getDoctrine()->getRepository(Cloth::class)->find($id);
@@ -164,14 +194,10 @@ class ClothController extends AbstractController
         $entityManager->remove($cloth);
         $entityManager->flush();
 
-        return $this->redirect("/");
+        return $this->json($cloth, 202, [], ["groups"=>["show_cloth"]]);
     }
 
-    /**
-     * @Route("/search", name="clothController_search")
-     */
-    public function search(string $searchField){
-        
+    public function searchCloth(string $searchField=""){ 
         if (empty($category)){
             $clothers = $this->getDoctrine()->getRepository(Cloth::class)->createQueryBuilder("c")
                 ->where("c.name LIKE :name")
@@ -179,23 +205,8 @@ class ClothController extends AbstractController
                 ->getQuery()
                 ->getResult();
 
-            return $this->render("searchResult.twig", [
-                "items" => $clothers
-            ]);
+            return $this->json($clothers, 200, [], ["groups"=>["show_cloth"]]);
         }
-    }
-
-    /**
-     * @Route("/getClothByCategory", name="clothController_getClothByCategory")
-     */
-    public function getClothByCategory(string $id){
-        $category = $this->getDoctrine()->getRepository(Category::class)->find($id);
-        dump($category);
-        $clothers = $category->getCloths();
-        dump($clothers);
-        return $this->render("searchResult.twig", [
-            "items" => $clothers
-        ]);
     }
 }
 ?>

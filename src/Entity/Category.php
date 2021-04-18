@@ -6,6 +6,7 @@ use App\Repository\CategoryRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 use Symfony\Component\Serializer\Annotation\Groups;
 
@@ -18,30 +19,38 @@ class Category
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
-     * @Groups("show_category")
+     * @Groups({"show_category", "show_cloth"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups("show_category")
+     * @Groups({"show_category", "show_cloth"})
+     * @Assert\NotBlank
      */
     private $name;
 
     /**
      * @ORM\Column(type="integer")
-     * @Groups("show_category")
+     * @Groups({"show_category", "show_cloth"})
+     * @Assert\NotBlank
+     * @Assert\Choice({-10, -5, 0, 5, 10, 20, 30})
      */
     private $temperature;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups("show_category")
+     * @Groups({"show_cloth", "show_category"})
+     * @Assert\NotBlank
+     * @Assert\Choice({"sunny", "rainy", "foggy", "cloudy", "thunderstorm", "snowy"})
      */
     private $weather;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"show_category", "show_cloth"})
+     * @Assert\NotBlank
+     * @Assert\Choice({"none", "drizzle", "medium", "heavy"})
      */
     private $rainLevel;
 

@@ -17,7 +17,14 @@ class LocationController extends AbstractController
 {
 
     /**
-     * @Route("/update/location", name="locationController_updateLocation")
+     * @Route("/api/location/get", name="locationController_getLocation")
+     */
+    public function getLocation(){
+        $locations = $this->getDoctrine()->getRepository(Location::class)->findAll();
+        return $this->json($locations, 200, [], ["groups"=>["show_location"]]);
+    }
+    /**
+     * @Route("/api/location/update", name="locationController_updateLocation")
      */
     public function updateLocation(string $country, string $city){
         $entityManager = $this->getDoctrine()->getManager();
@@ -33,7 +40,7 @@ class LocationController extends AbstractController
     }
 
     /**
-     * @Route("/remove/location", name="locationController_removeLocation")
+     * @Route("/api/location/remove", name="locationController_removeLocation")
      */
     public function removeLocation(){
         $entityManager = $this->getDoctrine()->getManager();
@@ -47,8 +54,5 @@ class LocationController extends AbstractController
 
         return $this->redirect("/");
     }
-
-    
-    
 }
 ?>

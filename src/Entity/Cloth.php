@@ -6,6 +6,9 @@ use App\Repository\ClothRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass=ClothRepository::class)
@@ -16,31 +19,42 @@ class Cloth
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * @Groups({"show_cloth", "show_category"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Groups({"show_category", "show_cloth"})
+     * @Assert\NotBlank
      */
     private $color;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"show_category","show_cloth"})
+     * @Assert\NotBlank
      */
     private $name;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"show_category", "show_cloth"})
+     * @Assert\NotBlank
      */
     private $fabric;
 
     /**
      * @ORM\Column(type="integer")
+     * @Groups({"show_category", "show_cloth"})
+     * @Assert\NotBlank
+     * @Assert\Choice({1, 2, 3, 4, 5, 6, 7, 8, 9, 10})
      */
     private $quantity;
 
     /**
      * @ORM\ManyToMany(targetEntity=Category::class, inversedBy="cloths")
+     * @Groups("show_cloth")
      */
     private $category;
 
