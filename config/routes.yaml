@@ -28,6 +28,11 @@ getLocation:
     controller: App\Controller\LocationController::getLocation
     methods: GET
 
+getAvailableLocation:
+    path: /api/location/available
+    controller: App\Controller\LocationController::getAvailableLocation
+    methods: GET
+
 updateLocation:
     path: /api/location/{country}-{city}
     controller: App\Controller\LocationController::updateLocation
