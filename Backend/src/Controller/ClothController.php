@@ -33,7 +33,7 @@ class ClothController extends AbstractController
             $category = $this->getDoctrine()->getRepository(Category::class)->find($catId);
             $clothers = $category->getCloths();
         }
-        return $this->json($clothers, 200, [], ["groups"=>["show_cloth"]]);
+        return $this->json($clothers, 200, ["Access-Control-Allow-Origin" => "*"], ["groups"=>["show_cloth"]]);
     }
 
     public function getCloth(){

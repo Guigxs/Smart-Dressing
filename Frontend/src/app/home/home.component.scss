@@ -1,0 +1,97 @@
+.top{
+    padding: .5rem 1rem .5rem 1rem;
+    display: flex;
+}
+
+.top .left{   
+    flex: 8;
+    border-style: solid;
+    border-color: gray;
+    margin-right: 1rem;
+    padding: 10px;
+}
+
+.top .left .clothersList{
+    /* width: 100px; */
+    display: inline-block;
+    margin: 1rem 0;
+}
+
+.top .left .clothersList .cloth{
+    margin: .2rem;
+    width: 130px;
+    float: left;
+    border-style: solid;
+    border-color: gray;
+    border-radius: 5px;
+    position: relative;
+}
+
+.top .cloth:hover .del{
+    display: block;
+    background-color: rgba(209, 0, 0, 0.74);
+    position: absolute;
+    top: -10px;
+    left: 110px;
+    border-radius: 10px;
+    width: 30px;
+    color: white;
+    text-align: center;
+    font-size: 22px;
+    cursor: pointer;
+}
+
+.top .cloth .del{
+    display: none;
+}
+
+.top .cloth .imageLoc{
+    padding: .5rem;
+}
+
+.top .cloth .image{
+    width: 100%;
+}
+
+.top .cloth .specs{
+    font-size:12px;
+    padding: 1rem .5rem;
+    background-color: rgb(223, 223, 223);
+}
+
+.top .right{
+    flex: 1;
+}
+
+.top .right .new{
+    margin: auto;
+}
+
+.top .right .new .newButton{
+    font-size: 25px;
+    width: 100%;
+    border-radius: 10px;
+    border-width: 1px;
+    cursor: pointer;
+}
+
+.bottom{
+    text-align: center;
+}
+
+.bottom .getMyCloth{
+    font-size: 25px;
+    border-radius: 10px;
+    border-width: 1px;
+    cursor: pointer;
+}
+
+.removeWardrobe{
+    background-color: rgb(56, 2, 2);
+    padding: .4em;
+    color: red;
+    width: 12rem;
+    float: right;
+    border-radius: 10px;
+    cursor: pointer;
+}

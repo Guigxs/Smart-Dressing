@@ -1,0 +1,72 @@
+/* ----- New ----- */
+.new{
+}
+
+.new .columns{
+    display: flex;
+}
+
+.new .columns .col{
+    text-align: center;
+    flex:1;
+    margin: 1rem;
+    border-style: solid;
+    border-color: gray;
+}
+
+.new .form{
+    margin: 1rem;
+    text-align: left;
+}
+
+.new .form .item{
+    margin: 0.5rem 0;
+}
+
+.new .send{
+    text-align: right;
+}
+
+.new .send .button{
+    
+}
+
+.new .list{
+    margin: 1rem;
+    text-align: left;
+}
+
+.new .list .category{
+    margin: 0.5rem 0;
+    padding: 1rem;
+    background-color: rgb(202, 200, 200);
+    display: flex;
+    position: relative;
+}
+
+.new .list .category:hover .del{
+    display: block;
+    background-color: rgba(209, 0, 0, 0.74);
+    position: absolute;
+    top : -10px;
+    left: 320px;
+    border-radius: 10px;
+    width: 30px;
+    color: white;
+    text-align: center;
+    font-size: 22px;
+    cursor: pointer;
+}
+
+.new .list .category .del{
+    display: none;
+}
+
+.new .list .category .name{
+
+}
+.new .list .category .specs{
+    font-size: 12px;
+    font-style: italic;
+    margin: 3px 0 0 3px;
+}

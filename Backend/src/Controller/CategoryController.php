@@ -18,7 +18,7 @@ class CategoryController extends AbstractController
     public function getCategories(){
         $categories = $this->getDoctrine()->getRepository(Category::class)->findAll();
         
-        return $this->json($categories, 200, [], ["groups"=>["show_category"]]);
+        return $this->json($categories, 200, ["Access-Control-Allow-Origin" => "*"], ["groups"=>["show_category"]]);
     }
 
     public function createCategory(Request $request, SerializerInterface $serializer, ValidatorInterface $validator){

@@ -1,0 +1,85 @@
+<div class="new">
+    <div class="columns">
+        <div class="col">
+            <h1>Create new cloth</h1>
+
+            <!-- {{form_start(newClothForm, { 'attr' : { 'class': 'form' } })}}
+
+                <div class="item name">
+                    <label for="name">Name : </label>
+                    {{ form_widget(newClothForm.name) }}
+                </div>
+
+                <div class="item category">
+                    <label for="category">Category : </label>
+                    {{ form_widget(newClothForm.category) }}
+                </div>
+
+                <div class="item color">
+                    <label for="color">Color : </label>
+                    {{ form_widget(newClothForm.color) }}
+                </div>
+
+                <div class="item fabric">
+                    <label for="fabric">Fabric : </label>
+                    {{ form_widget(newClothForm.fabric) }}
+                </div>
+
+                <div class="item quantity">
+                    <label for="quantity">Quantity : </label>
+                    {{ form_widget(newClothForm.quantity) }}
+                </div>
+
+                <div class="send">
+                    {{ form_widget(newClothForm.submit) }}
+                </div>
+
+            {{form_end(newClothForm)}} -->
+        </div>
+
+        <div class="col">
+            <h1>Create new category</h1>
+            
+            <!-- {{form_start(newCategoryForm, { 'attr' : { 'class': 'form' } })}}
+
+                <div class="item name">
+                    <label for="name">Name : </label>
+                    {{ form_widget(newCategoryForm.name) }}
+                </div>
+
+                <div class="item temperature">
+                    <label for="temperature">Temperature : </label>
+                    {{ form_widget(newCategoryForm.temperature) }}
+                </div>
+
+                <div class="item weather">
+                    <label for="weather">Weather : </label>
+                    {{ form_widget(newCategoryForm.weather) }}
+                </div>
+
+                <div class="item rain">
+                    <label for="rain">Rain/Snow level : </label>
+                    {{ form_widget(newCategoryForm.rainLevel) }}
+                </div>
+
+                <div class="send">
+                    {{ form_widget(newCategoryForm.submit) }}
+                </div>
+                
+            {{form_end(newCategoryForm)}} -->
+        
+        </div>
+
+        <div class="col">
+            <h1>Category list</h1>
+
+            <div class="list">
+                    <div *ngFor="let category of categories" class="category">
+                        <div class="del" (click)="removeCategory(category.id)">-</div>
+                        <div class="name" (click)="selectCategory(category.id)">{{category.id}}- {{category.name}} : </div>
+                        <div class="specs"> {{category.temperature}}°C - {{category.weather}} - {{category.rainLevel}} </div> 
+                    </div>
+            </div>
+        </div>
+    </div>
+</div>

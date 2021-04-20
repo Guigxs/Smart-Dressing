@@ -4,13 +4,26 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
+import { HttpClientModule } from '@angular/common/http';
+import { CategoriesComponent } from './categories/categories.component';
+import { HomeComponent } from './home/home.component';
+import { NewComponent } from './new/new.component';
+import { HeaderComponent } from './header/header.component';
+import { LocationComponent } from './location/location.component'
+
 @NgModule({
   declarations: [
     AppComponent,
+    CategoriesComponent,
+    HomeComponent,
+    NewComponent,
+    HeaderComponent,
+    LocationComponent,
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

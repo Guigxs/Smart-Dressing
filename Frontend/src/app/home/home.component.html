@@ -1,0 +1,43 @@
+<div class="dashboard">
+    <div class="top">
+        <div class="left">
+            <h1>Hello user !</h1>
+
+            <div class="customHelloMessage">
+                Today's temperature 
+                <!-- in <b>{{wheather["name"]}}</b> is {{wheather["main"]["feels_like"]}}°C -->
+            </div>
+
+            <div class="clothersList">
+                <div *ngFor="let cloth of clothers" class="cloth" id="{{cloth.id}}">
+                    <div class="del" (click)="deleteCloth(cloth.id)">
+                        -
+                    </div>
+                    <div class="imageLoc">
+                        <img class="image" alt="Default cloth" >
+                    </div>
+
+                    <div class="specs">
+                        <div class="name">Name: {{cloth.name}}</div>
+                        <div class="color">Color: {{cloth.color}}</div>
+                        <div class="quantity">Quantity: {{cloth.quantity}}</div>
+                        <div class="fabric">Fabric: {{cloth.fabric}}</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="removeWardrobe" onclick="removeWardrobe()">- Remove Wardrobe n°2</div>  
+
+        </div>
+
+        <div class="right">
+            <div class="new">
+                <button class="newButton" routerLink="/new" routerLinkActive="active">New</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="bottom">
+        <button class="getMyCloth" onclick="getMyCloth()">Get my cloth for today!</button>
+    </div>
+</div>
