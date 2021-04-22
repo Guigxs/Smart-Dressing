@@ -33,7 +33,7 @@ class ClothController extends AbstractController
             $category = $this->getDoctrine()->getRepository(Category::class)->find($catId);
             $clothers = $category->getCloths();
         }
-        return $this->json($clothers, 200, ["Access-Control-Allow-Origin" => "*"], ["groups"=>["show_cloth"]]);
+        return $this->json($clothers, 200, ["Access-Control-Allow-Origin" => "*", "Access-Control-Allow-Headers" => "*"], ["groups"=>["show_cloth"]]);
     }
 
     public function getCloth(){
@@ -145,11 +145,15 @@ class ClothController extends AbstractController
 
             $clothers = $categories[0]->getCloths();
 
-            return $this->json($clothers, 200, [], ["groups"=>["show_cloth"]]);
+            return $this->json($clothers, 200, ["Access-Control-Allow-Origin" => "*", "Access-Control-Allow-Headers" => "*"], ["groups"=>["show_cloth"]]);
         }
     }
 
     public function createCloth(Request $request, DenormalizerInterface $denormalizer, ValidatorInterface $validator){
+        if ($request->isMethod('OPTIONS')) {
+            return $this->json([], 200, ["Access-Control-Allow-Origin" => "*", "Access-Control-Allow-Headers" => "*", "Access-Control-Allow-Methods" => "*"]);
+        }
+        
         try{
             $data = json_decode($request->getContent(), true);
             $categories = $data["categories"];
@@ -157,13 +161,13 @@ class ClothController extends AbstractController
 
             $errors = $validator->validate($cloth);
             if (count($errors) > 0){
-                return $this->json([$errors], 400);
+                return $this->json([$errors], 400, ["Access-Control-Allow-Origin" => "*", "Access-Control-Allow-Headers" => "*", "Access-Control-Allow-Methods" => "*"]);
             }
 
         }catch(ErrorException $e) {
             return $this->json([
                 "error"=>"Syntax error"
-            ], 400);
+            ], 400, ["Access-Control-Allow-Origin" => "*", "Access-Control-Allow-Headers" => "*",]);
         }
         
         
@@ -175,7 +179,7 @@ class ClothController extends AbstractController
             else{
                 return $this->json([
                     "error"=>"One on more category does not exist"
-                ], 400);
+                ], 400, ["Access-Control-Allow-Origin" => "*", "Access-Control-Allow-Headers" => "*"]);
             }
         }
 
@@ -184,17 +188,21 @@ class ClothController extends AbstractController
         $entityManager->persist($cloth);
         $entityManager->flush();
 
-        return $this->json($cloth, 201, [], ["groups"=>["show_cloth"]]);
+        return $this->json($cloth, 201, ["Access-Control-Allow-Origin" => "*", "Access-Control-Allow-Headers" => "*"], ["groups"=>["show_cloth"]]);
     }
 
-    public function removeCloth(string $id){
+    public function removeCloth(string $id, Request $request){
+        if ($request->isMethod('OPTIONS')) {
+            return $this->json([], 200, ["Access-Control-Allow-Origin" => "*", "Access-Control-Allow-Headers" => "*", "Access-Control-Allow-Methods" => "*"]);
+        }
+
         $entityManager = $this->getDoctrine()->getManager();
         $cloth = $this->getDoctrine()->getRepository(Cloth::class)->find($id);
 
         $entityManager->remove($cloth);
         $entityManager->flush();
 
-        return $this->json($cloth, 202, [], ["groups"=>["show_cloth"]]);
+        return $this->json($cloth, 202, ["Access-Control-Allow-Origin" => "*", "Access-Control-Allow-Headers" => "*"], ["groups"=>["show_cloth"]]);
     }
 
     public function searchCloth(string $searchField=""){ 
@@ -205,7 +213,7 @@ class ClothController extends AbstractController
                 ->getQuery()
                 ->getResult();
 
-            return $this->json($clothers, 200, [], ["groups"=>["show_cloth"]]);
+            return $this->json($clothers, 200, ["Access-Control-Allow-Origin" => "*", "Access-Control-Allow-Headers" => "*"], ["groups"=>["show_cloth"]]);
         }
     }
 }

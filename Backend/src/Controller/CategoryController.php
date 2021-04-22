@@ -22,18 +22,22 @@ class CategoryController extends AbstractController
     }
 
     public function createCategory(Request $request, SerializerInterface $serializer, ValidatorInterface $validator){
+        if ($request->isMethod('OPTIONS')) {
+            return $this->json([], 200, ["Access-Control-Allow-Origin" => "*", "Access-Control-Allow-Headers" => "*", "Access-Control-Allow-Methods" => "*"]);
+        }
+
         try{
             $category = $serializer->deserialize($request->getContent(), Category::class, "json");
             
             $errors = $validator->validate($category);
             if (count($errors) > 0){
-                return $this->json([$errors], 400);
+                return $this->json([$errors], 400, ["Access-Control-Allow-Origin" => "*", "Access-Control-Allow-Headers" => "*"]);
             }
 
         }catch(NotEncodableValueException $e) {
             return $this->json([
                 "error"=>$e->getMessage()
-            ], 400);
+            ], 400, ["Access-Control-Allow-Origin" => "*", "Access-Control-Allow-Headers" => "*"]);
         }
         
         $entityManager = $this->getDoctrine()->getManager();
@@ -41,17 +45,21 @@ class CategoryController extends AbstractController
         $entityManager->persist($category);
         $entityManager->flush();
 
-        return $this->json($category, 201, [], ["groups"=>["show_cloth"]]);
+        return $this->json($category, 201, ["Access-Control-Allow-Origin" => "*", "Access-Control-Allow-Headers" => "*"], ["groups"=>["show_cloth"]]);
     }
 
-    public function removeCategory(string $id){
+    public function removeCategory(string $id, Request $request){
+        if ($request->isMethod('OPTIONS')) {
+            return $this->json([], 200, ["Access-Control-Allow-Origin" => "*", "Access-Control-Allow-Headers" => "*", "Access-Control-Allow-Methods" => "*"]);
+        }
+
         $entityManager = $this->getDoctrine()->getManager();
         $category = $this->getDoctrine()->getRepository(Category::class)->find($id);
 
         $entityManager->remove($category);
         $entityManager->flush();
 
-        return $this->json($category, 200, [], ["groups"=>["show_category"]]);
+        return $this->json($category, 200, ["Access-Control-Allow-Origin" => "*", "Access-Control-Allow-Headers" => "*"], ["groups"=>["show_category"]]);
     }   
 }
 ?>

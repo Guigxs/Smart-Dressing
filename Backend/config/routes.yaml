@@ -15,12 +15,12 @@ getWardrobe:
 createWardrobe:
     path: /api/wardrobe
     controller: App\Controller\WardrobeController::createWardrobe
-    methods: POST
+    methods: POST|OPTIONS
 
 removeWardrobe:
     path: /api/wardrobe/{id}
     controller: App\Controller\WardrobeController::removeWardrobe
-    methods: DELETE
+    methods: DELETE|OPTIONS
   
 
 getLocation:
@@ -36,12 +36,18 @@ getAvailableLocation:
 updateLocation:
     path: /api/location/{country}-{city}
     controller: App\Controller\LocationController::updateLocation
-    methods: POST
+    methods: POST|OPTIONS
 
 removeLocation:
     path: /api/location
     controller: App\Controller\LocationController::removeLocation
-    methods: DELETE
+    methods: DELETE|OPTIONS
+
+
+getWeather:
+    path: /api/weather
+    controller: App\Controller\LocationController::getWeather
+    methods: GET
 
 
 getCategories:
@@ -52,12 +58,12 @@ getCategories:
 createCategory:
     path: /api/category
     controller: App\Controller\CategoryController::createCategory
-    methods: POST
+    methods: POST|OPTIONS
 
 removeCategory:
     path: /api/category/{id}
     controller: App\Controller\CategoryController::removeCategory
-    methods: DELETE
+    methods: DELETE|OPTIONS
 
 
 getAllCloth:
@@ -68,12 +74,12 @@ getAllCloth:
 createCloth:
     path: /api/cloth
     controller: App\Controller\ClothController::createCloth
-    methods: POST
+    methods: POST|OPTIONS
 
 removeCloth:
     path: /api/cloth/{id}
     controller: App\Controller\ClothController::removeCloth
-    methods: DELETE
+    methods: DELETE|OPTIONS
 
 getCloth:
     path: /api/getCloth
