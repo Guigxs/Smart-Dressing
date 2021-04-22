@@ -1,11 +1,10 @@
-<div class="dashboard">
+<div *ngIf="wardrobe" class="dashboard">
     <div class="top">
         <div class="left">
             <h1>Hello user !</h1>
 
             <div class="customHelloMessage">
-                Today's temperature 
-                <!-- in <b>{{wheather["name"]}}</b> is {{wheather["main"]["feels_like"]}}°C -->
+                Today's temperature in <b>{{weather.name}}</b> is {{weather.main.feels_like}}°C
             </div>
 
             <div class="clothersList">
@@ -14,7 +13,7 @@
                         -
                     </div>
                     <div class="imageLoc">
-                        <img class="image" alt="Default cloth" >
+                        <img class="image" alt="Default cloth" src="/assets/cloth.png" [ngStyle]="{'background-color':cloth.color}">
                     </div>
 
                     <div class="specs">
@@ -26,7 +25,7 @@
                 </div>
             </div>
 
-            <div class="removeWardrobe" onclick="removeWardrobe()">- Remove Wardrobe n°2</div>  
+            <div class="removeWardrobe" (click)="removeWardrobe(wardrobe[0].id)">- Remove Wardrobe n°{{wardrobe[0].id}}</div>  
 
         </div>
 
@@ -40,4 +39,13 @@
     <div class="bottom">
         <button class="getMyCloth" onclick="getMyCloth()">Get my cloth for today!</button>
     </div>
+</div>
+
+
+<div *ngIf="wardrobe === null" class="index">
+    <button class="createWardrobe" (click)="createWardrobe()">+<br>New wardrobe</button>
+</div>
+
+<div *ngIf="wardrobe === undefined">
+    Loading...
 </div>

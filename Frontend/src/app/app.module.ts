@@ -9,7 +9,7 @@ import { CategoriesComponent } from './categories/categories.component';
 import { HomeComponent } from './home/home.component';
 import { NewComponent } from './new/new.component';
 import { HeaderComponent } from './header/header.component';
-import { LocationComponent } from './location/location.component'
+import { LocationComponent } from './location/location.component';
 
 @NgModule({
   declarations: [

@@ -20,6 +20,11 @@ export interface Cloth {
   quantity: string,
 }
 
+export interface Wardrobe {
+  id: number,
+  user: object
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -30,6 +35,22 @@ export class RestService {
   getCategories(): Observable<any> {  
     return this.http.get<Category>(endpoint+"/category")
   }
+  getWeather(): Observable<any> {  
+    return this.http.get(endpoint+"/weather")
+  }
+
+  getWardrobe(): Observable<any> {
+    return this.http.get<any>(endpoint+"/wardrobe")
+  }
+  removeWardrobe(id): Observable<any>{
+    console.log(endpoint+"/wardrobe/"+id)
+    return this.http.delete(endpoint+"/wardrobe/"+id)
+  }
+  createWardrobe(): Observable<any> {
+    console.log(endpoint+"/wardrobe/")
+    return this.http.post<any>(endpoint+"/wardrobe", {})
+  }
+
   getClothersForToday(): Observable<any> {
     return this.http.get<Cloth>(endpoint+"/getCloth")
   }
@@ -38,5 +59,18 @@ export class RestService {
       return this.http.get<Cloth>(endpoint+"/cloth/"+category)
     }
     return this.http.get<Cloth>(endpoint+"/cloth")
+  }
+
+  getLocation(): Observable<any> {
+    return this.http.get(endpoint+"/location")
+  }
+  getAllLocations(): Observable<any> {
+    return this.http.get(endpoint+"/location/available")
+  }
+  deleteLocation(): Observable<any> {
+    return this.http.delete(endpoint+"/location")
+  }
+  createLocation(country, city): Observable<any> {
+    return this.http.post(endpoint+"/location/"+country+"-"+city, {})
   }
 }
