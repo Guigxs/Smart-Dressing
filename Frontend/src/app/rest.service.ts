@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http'
-import { Observable } from 'rxjs'
+import { HttpClient, } from '@angular/common/http'
+import { Observable, of, } from 'rxjs'
+import { catchError, } from 'rxjs/operators';
 
 const endpoint = "http://localhost:8000/api"
 
@@ -52,7 +53,7 @@ export class RestService {
   }
 
   getClothersForToday(): Observable<any> {
-    return this.http.get<Cloth>(endpoint+"/getCloth")
+    return this.http.get<Cloth>(endpoint+"/getCloth").pipe(catchError(err=> of([])))
   }
   getClothers(category=null): Observable<any> {
     if (category){

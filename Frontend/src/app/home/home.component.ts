@@ -50,6 +50,12 @@ export class HomeComponent implements OnInit, OnDestroy{
     })
   }
 
+  getMyCloth(){
+    this.rest.getClothersForToday().subscribe((resp) => {
+      this.clothers = resp
+    })
+  }
+
   getWeather(){
     this.rest.getWeather().subscribe((resp) => {
       console.log(resp.name)

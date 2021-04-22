@@ -140,7 +140,7 @@ class ClothController extends AbstractController
             $categories = $this->getDoctrine()->getRepository(Category::class)->findBestCategory($temperatureQuery, $weatherQuery, $rainQuery);
             
             if (empty($categories)){
-                return $this->json(["error"=>"There is no category for this weather"], 300, [], []);
+                return $this->json(["error"=>"There is no category for this weather"], 300, ["Access-Control-Allow-Origin" => "*", "Access-Control-Allow-Headers" => "*"], []);
             }
 
             $clothers = $categories[0]->getCloths();
