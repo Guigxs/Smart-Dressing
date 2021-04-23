@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Category, RestService } from '../rest.service';
 
 @Component({
@@ -9,8 +10,10 @@ import { Category, RestService } from '../rest.service';
 export class NewComponent implements OnInit {
 
   categories: Category[] = []
+  
+  name
 
-  constructor(public rest:RestService, ) { }
+  constructor(private router: Router, public rest:RestService, ) { }
 
   ngOnInit(): void {
     this.getCategories()
@@ -24,10 +27,20 @@ export class NewComponent implements OnInit {
 
   removeCategory(category){
     console.log("remove"+category)
+
   }
 
   selectCategory(category){
     console.log("select"+category)
+    this.router.navigate(["home", {"category":category}])
+  }
+
+  onClothSubmit(){
+    console.log("sumb")
+  }
+
+  onCategorySubmit(){
+    console.log("cate sub")
   }
 
 }

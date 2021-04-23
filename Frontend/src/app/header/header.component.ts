@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { RestService } from '../rest.service';
 
 @Component({
   selector: 'app-header',
@@ -7,9 +9,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor() { }
+  constructor(private router: Router,) { }
 
   ngOnInit(): void {
+  }
+
+  search(text){
+    this.router.navigate(["home", {"search":text}])
   }
 
 }

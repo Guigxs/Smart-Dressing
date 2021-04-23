@@ -61,6 +61,9 @@ export class RestService {
     }
     return this.http.get<Cloth>(endpoint+"/cloth")
   }
+  search(text): Observable<any> {
+    return this.http.get<Cloth>(endpoint+"/cloth/search/"+text)
+  }
 
   getLocation(): Observable<any> {
     return this.http.get(endpoint+"/location")

@@ -3,8 +3,8 @@
 	    <h1 routerLink="/" routerLinkActive="active">Smart-Dressing</h1>
     </div>
     <div class="searchBar">
-        <input id="bar" class="bar" type="text" placeholder="Search a cloth...">
-        <button onclick="search()">GO!</button>
+        <input (keyup.enter)="search($event.target.value)" id="bar" class="bar" type="text" placeholder="Search a cloth..." #text>
+        <button (click)="search(text.value)">GO!</button>
     </div>
     <div class="location" routerLink="/location" routerLinkActive="active">Change location</div>
 </div>

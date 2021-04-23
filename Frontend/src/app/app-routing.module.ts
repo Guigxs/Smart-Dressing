@@ -6,7 +6,8 @@ import { HomeComponent } from './home/home.component'
 import { LocationComponent } from './location/location.component'
 
 const routes: Routes = [
-  { path: '', component: HomeComponent, runGuardsAndResolvers: 'always',},
+  { path: '', redirectTo: '/home', pathMatch: 'full', runGuardsAndResolvers: 'always',},
+  { path: 'home', component: HomeComponent, runGuardsAndResolvers: 'always',},
   { path: 'new', component: NewComponent, runGuardsAndResolvers: 'always' },
   { path: 'location', component: LocationComponent, runGuardsAndResolvers: 'always' },
 ];

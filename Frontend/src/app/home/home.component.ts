@@ -1,5 +1,5 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { NavigationEnd, Router } from '@angular/router';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { Cloth, RestService, Wardrobe } from '../rest.service';
 
 @Component({
@@ -18,7 +18,7 @@ export class HomeComponent implements OnInit, OnDestroy{
   }
   wardrobe = undefined
   navigationSubscription;
-  constructor(private router: Router, public rest:RestService, ) {
+  constructor(private router: Router, public rest:RestService, private route: ActivatedRoute) {
     this.navigationSubscription = this.router.events.subscribe((e: any) => {
       // If it is a NavigationEnd event re-initalise the component
       if (e instanceof NavigationEnd) {
@@ -29,9 +29,22 @@ export class HomeComponent implements OnInit, OnDestroy{
 
 
   ngOnInit(): void {
+    console.log("init home");
+    
+    const category = this.route.snapshot.paramMap.get('category');
+    const searchText = this.route.snapshot.paramMap.get('search');
+    console.log(searchText);
+    
+    
     this.getWardrobe()
     this.getWeather()
-    this.getClothers()
+    if (!searchText){
+      this.getClothers(category)
+    }
+    else {
+      this.searchCloth(searchText)
+    }
+    
   }
 
   ngOnDestroy(): void {
@@ -44,14 +57,20 @@ export class HomeComponent implements OnInit, OnDestroy{
     this.ngOnInit()
   }
 
-  getClothers(){
-    this.rest.getClothers().subscribe((resp) => {
+  getClothers(category){
+    this.rest.getClothers(category).subscribe((resp) => {
       this.clothers = resp
     })
   }
 
   getMyCloth(){
     this.rest.getClothersForToday().subscribe((resp) => {
+      this.clothers = resp
+    })
+  }
+
+  searchCloth(text){
+    this.rest.search(text).subscribe(resp => {
       this.clothers = resp
     })
   }

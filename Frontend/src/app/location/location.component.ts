@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { RestService } from '../rest.service';
 
 @Component({
@@ -9,11 +9,14 @@ import { RestService } from '../rest.service';
 })
 export class LocationComponent implements OnInit {
 
-  constructor(private router: Router, public rest:RestService, ) { }
+  constructor(private router: Router, public rest:RestService, private route: ActivatedRoute ) { }
 
   locations
 
   ngOnInit(): void {
+    const category = this.route.snapshot.paramMap.get('category');
+    console.log(category);
+
     this.getAllLocations()
   }
 
