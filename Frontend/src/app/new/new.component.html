@@ -6,7 +6,7 @@
             <form (ngSubmit)="onClothSubmit()">
                 <div class="item name">
                     <label for="name">Name : </label>
-                    <!-- <input [(ngModel)]="name" type="text" name="name" id="name" required/> -->
+                    <!-- <input [(ngModel)]="name" type="text" name="name" id="name" /> -->
                 </div>
 
                 <div class="item category">
@@ -34,26 +34,48 @@
         <div class="col">
             <h1>Create new category</h1>
 
-            <form (ngSubmit)="onCategorySubmit()">
+            <form class="form" (ngSubmit)="onCategorySubmit()" #categoryForm=ngForm>
 
                 <div class="item name">
-                    <label for="name">Name : </label>
+                    <label for="catname">Name : </label>
+                    <input [(ngModel)]="newCategory.name" name="catname" type="text" 
+                        id="catname" required #name="ngModel">
+
+                    <div [hidden]="name.valid || name.pristine"
+                        class="alert alert-danger">Name is require</div>
                 </div>
 
                 <div class="item temperature">
                     <label for="temperature">Temperature : </label>
+                    
+                    <select id="temperature" type="number"
+                            required
+                            [(ngModel)]="newCategory.temperature" name="temperature">
+                        <option *ngFor="let i of temperatures; index as j" [value]=j>{{i}}</option>
+                    </select>
                 </div>
 
                 <div class="item weather">
                     <label for="weather">Weather : </label>
+                    <select id="weather"
+                            required
+                            [(ngModel)]="newCategory.weather" name="weather">
+                        <option *ngFor="let i of weathers" [value]="i">{{i}}</option>
+                    </select>
                 </div>
 
                 <div class="item rain">
                     <label for="rain">Rain/Snow level : </label>
+                    <select id="rain"
+                            required
+                            [(ngModel)]="newCategory.rainLevel" name="rain">
+                        <option *ngFor="let i of rainLevels" [value]="i">{{i}}</option>
+                    </select>
                 </div>
 
-                <div class="send">
-                    <input type="submit" value="Submit"/>
+                <div class="item send">
+                    <input type="submit" value="Submit"
+                        [disabled]="!categoryForm.form.valid"/>
                 </div>
             </form>
         

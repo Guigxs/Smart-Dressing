@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Category, RestService } from '../rest.service';
+import { Cloth, Category, RestService } from '../rest.service';
+
 
 @Component({
   selector: 'app-new',
@@ -9,9 +10,27 @@ import { Category, RestService } from '../rest.service';
 })
 export class NewComponent implements OnInit {
 
+  a = "hehehe"
+
+  temperatures = [-10, -5, 0, 5, 10, 20, 30]
+  weathers = ["sunny", "rainy", "foggy", "cloudy", "thunderstorm", "sonwy"]
+  rainLevels = ["none", "drizzle", "medium", "heavy"]
+
   categories: Category[] = []
   
-  name
+  newCloth = {
+    name:null, 
+    color:null,
+    fabric:null,
+    quantity:null,
+    categories:[]
+  }
+  newCategory = {
+    name:null, 
+    temperature:null,
+    weather:null,
+    rainLevel:null
+  }
 
   constructor(private router: Router, public rest:RestService, ) { }
 
@@ -40,7 +59,11 @@ export class NewComponent implements OnInit {
   }
 
   onCategorySubmit(){
-    console.log("cate sub")
+    this.newCategory.temperature = this.temperatures[this.newCategory.temperature]
+    
+    this.rest.createCategory(this.newCategory).subscribe(resp => {
+      this.router.navigate(["home"])
+    })
   }
 
 }

@@ -39,6 +39,9 @@ export class RestService {
   getWeather(): Observable<any> {  
     return this.http.get(endpoint+"/weather")
   }
+  createCategory(data): Observable<any> {
+    return this.http.post<any>(endpoint+"/category", data)
+  }
 
   getWardrobe(): Observable<any> {
     return this.http.get<any>(endpoint+"/wardrobe")

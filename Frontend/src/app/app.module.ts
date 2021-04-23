@@ -3,13 +3,14 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-
+import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { CategoriesComponent } from './categories/categories.component';
 import { HomeComponent } from './home/home.component';
 import { NewComponent } from './new/new.component';
 import { HeaderComponent } from './header/header.component';
 import { LocationComponent } from './location/location.component';
+
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { LocationComponent } from './location/location.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
