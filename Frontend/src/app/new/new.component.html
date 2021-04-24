@@ -3,30 +3,52 @@
         <div class="col">
             <h1>Create new cloth</h1>
 
-            <form (ngSubmit)="onClothSubmit()">
+            <form class="form" (ngSubmit)="onClothSubmit()" #clothForm=ngForm>
                 <div class="item name">
                     <label for="name">Name : </label>
-                    <!-- <input [(ngModel)]="name" type="text" name="name" id="name" /> -->
+                    <input [(ngModel)]="newCloth.name" type="text" name="clothname" 
+                        id="clothname" required #clothname="ngModel">
+                    <div [hidden]="clothname.valid || clothname.pristine"
+                        class="">Name is require</div>
                 </div>
 
                 <div class="item category">
                     <label for="category">Category : </label>
+                    <select id="category"
+                            multiple
+                            required
+                            [(ngModel)]="newCloth.categories" name="category">
+                        <option *ngFor="let i of categories" [value]=i.id>{{i.name}}</option>
+                    </select>
                 </div>
 
                 <div class="item color">
                     <label for="color">Color : </label>
+                    <input [(ngModel)]="newCloth.color" type="text" name="clothcolor" 
+                        id="clothcolor" required #clothcolor="ngModel">
+                    <div [hidden]="clothcolor.valid || clothcolor.pristine"
+                        class="">Color is require</div>
                 </div>
 
                 <div class="item fabric">
                     <label for="fabric">Fabric : </label>
+                    <input [(ngModel)]="newCloth.fabric" type="text" name="clothfabric" 
+                        id="clothfabric" required #clothfabric="ngModel">
+                    <div [hidden]="clothfabric.valid || clothfabric.pristine"
+                        class="">Fabric is require</div>
                 </div>
 
                 <div class="item quantity">
                     <label for="quantity">Quantity : </label>
+                    <input [(ngModel)]="newCloth.quantity" type="number" name="clothquantity" 
+                        id="clothquantity" required #clothquantity="ngModel">
+                    <div [hidden]="clothquantity.valid || clothquantity.pristine"
+                        class="">Quantity is require</div>
                 </div>
 
                 <div class="send">
-                    <input type="submit" value="Submit"/>
+                    <input type="submit" value="Submit"
+                        [disabled]="!clothForm.form.valid"/>
                 </div>
             </form>
         </div>
@@ -48,7 +70,7 @@
                 <div class="item temperature">
                     <label for="temperature">Temperature : </label>
                     
-                    <select id="temperature" type="number"
+                    <select id="temperature"
                             required
                             [(ngModel)]="newCategory.temperature" name="temperature">
                         <option *ngFor="let i of temperatures; index as j" [value]=j>{{i}}</option>

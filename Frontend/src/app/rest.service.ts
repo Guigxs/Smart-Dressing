@@ -51,7 +51,6 @@ export class RestService {
     return this.http.delete(endpoint+"/wardrobe/"+id)
   }
   createWardrobe(): Observable<any> {
-    console.log(endpoint+"/wardrobe/")
     return this.http.post<any>(endpoint+"/wardrobe", {})
   }
 
@@ -66,6 +65,9 @@ export class RestService {
   }
   search(text): Observable<any> {
     return this.http.get<Cloth>(endpoint+"/cloth/search/"+text)
+  }
+  createCloth(data): Observable<any> {
+    return this.http.post<any>(endpoint+"/cloth", data)
   }
 
   getLocation(): Observable<any> {

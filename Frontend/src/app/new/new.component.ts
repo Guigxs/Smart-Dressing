@@ -55,7 +55,10 @@ export class NewComponent implements OnInit {
   }
 
   onClothSubmit(){
-    console.log("sumb")
+    console.log(this.newCloth)
+    this.rest.createCloth(this.newCloth).subscribe(resp => {
+      this.router.navigate(["home"])
+    })
   }
 
   onCategorySubmit(){
