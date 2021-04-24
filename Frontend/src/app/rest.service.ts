@@ -42,12 +42,14 @@ export class RestService {
   createCategory(data): Observable<any> {
     return this.http.post<any>(endpoint+"/category", data)
   }
+  deleteCategory(category): Observable<any> {
+    return this.http.delete(endpoint+"/category/"+category)
+  }
 
   getWardrobe(): Observable<any> {
     return this.http.get<any>(endpoint+"/wardrobe")
   }
-  removeWardrobe(id): Observable<any>{
-    console.log(endpoint+"/wardrobe/"+id)
+  deleteWardrobe(id): Observable<any>{
     return this.http.delete(endpoint+"/wardrobe/"+id)
   }
   createWardrobe(): Observable<any> {
@@ -68,6 +70,9 @@ export class RestService {
   }
   createCloth(data): Observable<any> {
     return this.http.post<any>(endpoint+"/cloth", data)
+  }
+  deleteCloth(id): Observable<any>{
+    return this.http.delete(endpoint+"/cloth/"+id)
   }
 
   getLocation(): Observable<any> {

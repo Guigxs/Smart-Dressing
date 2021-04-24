@@ -1,6 +1,6 @@
-import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
-import { Cloth, RestService, Wardrobe } from '../rest.service';
+import { Cloth, RestService } from '../rest.service';
 
 @Component({
   selector: 'app-home',
@@ -29,22 +29,18 @@ export class HomeComponent implements OnInit, OnDestroy{
 
 
   ngOnInit(): void {
-    console.log("init home");
-    
     const category = this.route.snapshot.paramMap.get('category');
     const searchText = this.route.snapshot.paramMap.get('search');
-    console.log(searchText);
-    
     
     this.getWardrobe()
     this.getWeather()
+
     if (!searchText){
       this.getClothers(category)
     }
     else {
       this.searchCloth(searchText)
     }
-    
   }
 
   ngOnDestroy(): void {
@@ -75,9 +71,14 @@ export class HomeComponent implements OnInit, OnDestroy{
     })
   }
 
+  deleteCloth(cloth){
+    this.rest.deleteCloth(cloth).subscribe(resp=> {
+      this.router.navigate(["home"])
+    })
+  }
+
   getWeather(){
     this.rest.getWeather().subscribe((resp) => {
-      console.log(resp.name)
       this.weather = resp
     })
   }
@@ -93,8 +94,8 @@ export class HomeComponent implements OnInit, OnDestroy{
     })
   }
 
-  removeWardrobe(id){
-    this.rest.removeWardrobe(id).subscribe(()=>{
+  deleteWardrobe(id){
+    this.rest.deleteWardrobe(id).subscribe(()=>{
       this.ngOnInit()
     })
   }
@@ -102,8 +103,6 @@ export class HomeComponent implements OnInit, OnDestroy{
   createWardrobe(){
     this.rest.createWardrobe().subscribe(()=> {
       this.ngOnInit()
-    })
-    
+    }) 
   }
-
 }

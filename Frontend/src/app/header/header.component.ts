@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { RestService } from '../rest.service';
 
 @Component({
   selector: 'app-header',

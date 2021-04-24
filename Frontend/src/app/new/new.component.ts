@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { Cloth, Category, RestService } from '../rest.service';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
+import { Category, RestService } from '../rest.service';
 
 
 @Component({
@@ -8,33 +8,51 @@ import { Cloth, Category, RestService } from '../rest.service';
   templateUrl: './new.component.html',
   styleUrls: ['./new.component.scss']
 })
-export class NewComponent implements OnInit {
-
-  a = "hehehe"
+export class NewComponent implements OnInit, OnDestroy {
 
   temperatures = [-10, -5, 0, 5, 10, 20, 30]
-  weathers = ["sunny", "rainy", "foggy", "cloudy", "thunderstorm", "sonwy"]
+  weathers = ["sunny", "rainy", "foggy", "cloudy", "thunderstorm", "snowy"]
   rainLevels = ["none", "drizzle", "medium", "heavy"]
 
   categories: Category[] = []
   
-  newCloth = {
-    name:null, 
-    color:null,
-    fabric:null,
-    quantity:null,
-    categories:[]
-  }
-  newCategory = {
-    name:null, 
-    temperature:null,
-    weather:null,
-    rainLevel:null
+  newCloth;
+  newCategory;
+
+  navigationSubscription;
+  constructor(private router: Router, public rest:RestService,  private route: ActivatedRoute) { 
+    this.navigationSubscription = this.router.events.subscribe((e: any) => {
+      // If it is a NavigationEnd event re-initalise the component
+      if (e instanceof NavigationEnd) {
+        this.initialiseInvites();
+      }
+    });
   }
 
-  constructor(private router: Router, public rest:RestService, ) { }
+  ngOnDestroy(): void {
+    if (this.navigationSubscription) {  
+      this.navigationSubscription.unsubscribe();
+   }
+  }
+  initialiseInvites() {
+    this.ngOnInit()
+  }
 
   ngOnInit(): void {
+    this.newCategory = {
+      name:null, 
+      temperature:null,
+      weather:null,
+      rainLevel:null
+    }
+    this.newCloth = {
+      name:null, 
+      color:null,
+      fabric:null,
+      quantity:null,
+      categories:[]
+    }
+
     this.getCategories()
   }
 
@@ -44,18 +62,17 @@ export class NewComponent implements OnInit {
     })
   }
 
-  removeCategory(category){
-    console.log("remove"+category)
-
+  deleteCategory(category){
+    this.rest.deleteCategory(category).subscribe(resp => {
+      this.router.navigate(["new"])
+    })
   }
 
   selectCategory(category){
-    console.log("select"+category)
     this.router.navigate(["home", {"category":category}])
   }
 
   onClothSubmit(){
-    console.log(this.newCloth)
     this.rest.createCloth(this.newCloth).subscribe(resp => {
       this.router.navigate(["home"])
     })
@@ -65,7 +82,7 @@ export class NewComponent implements OnInit {
     this.newCategory.temperature = this.temperatures[this.newCategory.temperature]
     
     this.rest.createCategory(this.newCategory).subscribe(resp => {
-      this.router.navigate(["home"])
+      this.router.navigate(["new"])
     })
   }
 

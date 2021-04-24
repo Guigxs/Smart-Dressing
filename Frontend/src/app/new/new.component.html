@@ -108,7 +108,7 @@
 
             <div class="list">
                     <div *ngFor="let category of categories" class="category">
-                        <div class="del" (click)="removeCategory(category.id)">-</div>
+                        <div class="del" (click)="deleteCategory(category.id)">-</div>
                         <div class="name" (click)="selectCategory(category.id)">{{category.id}}- {{category.name}} : </div>
                         <div class="specs"> {{category.temperature}}°C - {{category.weather}} - {{category.rainLevel}} </div> 
                     </div>

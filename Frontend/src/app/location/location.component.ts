@@ -15,7 +15,6 @@ export class LocationComponent implements OnInit {
 
   ngOnInit(): void {
     const category = this.route.snapshot.paramMap.get('category');
-    console.log(category);
 
     this.getAllLocations()
   }
@@ -29,7 +28,6 @@ export class LocationComponent implements OnInit {
   updateLocation(location){
     this.rest.deleteLocation().subscribe(()=> {
       this.rest.createLocation(location.name, location.capital).subscribe((resp)=> {
-        console.log(resp)
         this.router.navigate([""])
       })
     })
