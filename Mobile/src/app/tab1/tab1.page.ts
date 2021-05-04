@@ -9,13 +9,10 @@ import { Cloth, RestService, Category } from '../rest.service';
   styleUrls: ['tab1.page.scss']
 })
 export class Tab1Page implements OnInit, OnDestroy{
-
-  
   loading = true
   clothers: Cloth[] = []
   categories: Category[] = []
   add = "false"
-
   newCloth;
 
   navigationSubscription

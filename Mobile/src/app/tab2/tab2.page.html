@@ -1,8 +1,13 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>
-      Tab 2
+      Categories
     </ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="addCategory()">
+        <ion-icon name="add-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
@@ -13,5 +18,55 @@
     </ion-toolbar>
   </ion-header>
 
-  <app-explore-container name="Tab 2 page"></app-explore-container>
+  <div *ngIf="loading">
+    Loading ...
+  </div>
+
+  <app-categories-list *ngIf="!loading && add != 'true'" [categories]="categories"></app-categories-list>
+  
+  <div *ngIf="add == 'true'">
+    <form class="form" (ngSubmit)="onCategorySubmit()" #categoryForm=ngForm>
+
+      <div class="item name">
+          <ion-input placeholder="Category name" [(ngModel)]="newCategory.name" name="catname" type="text" 
+              id="catname" required #name="ngModel"></ion-input>
+
+          <div [hidden]="name.valid || name.pristine"
+              class="alert alert-danger">Name is require</div>
+      </div>
+
+      <div class="item temperature">          
+          <ion-select id="temperature"
+                  placeholder="Select a temperature"
+                  required
+                  [(ngModel)]="newCategory.temperature" name="temperature">
+              <ion-select-option *ngFor="let i of temperatures; index as j" [value]=j>{{i}}</ion-select-option>
+          </ion-select>
+      </div>
+
+      <div class="item weather">
+          <ion-select id="weather"
+                  placeholder="Select a weather type"
+                  required
+                  [(ngModel)]="newCategory.weather" name="weather">
+              <ion-select-option *ngFor="let i of weathers" [value]="i">{{i}}</ion-select-option>
+          </ion-select>
+      </div>
+
+      <div class="item rain">
+          <ion-select id="rain"
+                  placeholder="Select a rain level"
+                  required
+                  [(ngModel)]="newCategory.rainLevel" name="rain">
+              <ion-select-option *ngFor="let i of rainLevels" [value]="i">{{i}}</ion-select-option>
+          </ion-select>
+      </div>
+
+      <div class="item send">
+          <ion-button type="submit" value="Submit"
+              [disabled]="!categoryForm.form.valid">Submit</ion-button>
+      </div>
+  </form>
+
+  </div>
 </ion-content>

@@ -52,6 +52,9 @@ export class RestService {
   deleteWardrobe(id): Observable<any>{
     return this.http.delete(endpoint+"/wardrobe/"+id)
   }
+  deleteAllWardrobe(): Observable<any>{
+    return this.http.delete(endpoint+"/wardrobe/all")
+  }
   createWardrobe(): Observable<any> {
     return this.http.post<any>(endpoint+"/wardrobe", {})
   }
