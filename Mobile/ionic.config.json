@@ -1,0 +1,7 @@
+{
+  "name": "smart_dressing",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}

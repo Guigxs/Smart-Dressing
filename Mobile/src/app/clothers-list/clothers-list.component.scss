@@ -1,0 +1,21 @@
+.image{
+    width: 50%;
+    margin-left: 25%;
+}
+.delete{
+    float:right;
+    position: relative;
+    bottom:40px
+}
+
+@media (min-width: 425px) {
+    .card {
+        width: 50%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    .image{
+        width: 25%;
+        margin-left: 37%;
+    }
+}

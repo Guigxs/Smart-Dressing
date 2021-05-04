@@ -1,0 +1,13 @@
+{
+  "appId": "io.ionic.starter",
+  "appName": "smart_dressing",
+  "bundledWebRuntime": false,
+  "npmClient": "npm",
+  "webDir": "www",
+  "plugins": {
+    "SplashScreen": {
+      "launchShowDuration": 0
+    }
+  },
+  "cordova": {}
+}

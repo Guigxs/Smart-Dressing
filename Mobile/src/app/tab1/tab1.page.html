@@ -1,0 +1,73 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      Clothers
+    </ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="addCloth()">
+        <ion-icon name="add-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">TITRE 1</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <div *ngIf="loading">
+    Loading ...
+  </div>
+  <app-clothers-list *ngIf="!loading && add != 'true'" [clothers]="clothers"></app-clothers-list>
+
+  <div *ngIf="add == 'true'">
+    <form class="form" (ngSubmit)="onClothSubmit()" #clothForm=ngForm>
+      <div class="item name">
+          <ion-input placeholder="Cloth name" [(ngModel)]="newCloth.name" type="text" name="clothname" 
+              id="clothname" required #clothname="ngModel"></ion-input>
+          <div [hidden]="clothname.valid || clothname.pristine"
+              class="">Name is require</div>
+      </div>
+
+      <div class="item category">
+          <ion-select id="category"
+                  placeholder="Select one or more category"
+                  multiple
+                  required
+                  [(ngModel)]="newCloth.categories" name="category">
+              <ion-select-option *ngFor="let i of categories" [value]=i.id>{{i.name}}</ion-select-option>
+          </ion-select>
+      </div>
+
+      <div class="item color">
+          <ion-input placeholder="Cloth color" [(ngModel)]="newCloth.color" type="text" name="clothcolor" 
+              id="clothcolor" required #clothcolor="ngModel"></ion-input>
+          <div [hidden]="clothcolor.valid || clothcolor.pristine"
+              class="">Color is require</div>
+      </div>
+
+      <div class="item fabric">
+          <ion-input placeholder="Cloth fabric" [(ngModel)]="newCloth.fabric" type="text" name="clothfabric" 
+              id="clothfabric" required #clothfabric="ngModel"></ion-input>
+          <div [hidden]="clothfabric.valid || clothfabric.pristine"
+              class="">Fabric is require</div>
+      </div>
+
+      <div class="item quantity">
+          <ion-input placeholder="Cloth quantity" [(ngModel)]="newCloth.quantity" type="number" name="clothquantity" 
+              id="clothquantity" required #clothquantity="ngModel"></ion-input>
+          <div [hidden]="clothquantity.valid || clothquantity.pristine"
+              class="">Quantity is require</div>
+      </div>
+
+      <div class="send">
+          <ion-button type="submit" value="Submit"
+              [disabled]="!clothForm.form.valid">Submit</ion-button>
+      </div>
+  </form>
+
+  </div>
+</ion-content>
