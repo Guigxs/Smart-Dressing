@@ -3,7 +3,8 @@ import { HttpClient, } from '@angular/common/http'
 import { Observable, of, } from 'rxjs'
 import { catchError, } from 'rxjs/operators';
 
-const endpoint = "http://localhost:8000/api"
+// const endpoint = "http://localhost:8000/api"
+const endpoint = "http://192.168.1.22:8000/api"
 
 export interface Category {
   id: number,
